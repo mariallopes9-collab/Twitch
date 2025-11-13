@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Twitch</title>
+
+  <style>
+      @import url('https://fonts.googleapis.com/css2?family=Elms+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+     
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Elms Sans", sans-serif;
+  background-color: #0e0e10;
+  color: #efeff1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+/* ===== Layout principal ===== */
+.stream-container {
+  display: flex;
+  gap: 20px;
+  width: 90%;
+  max-width: 1100px;
+}
+
+/* ===== Câmera ===== */
+.camera-section {
+  flex: 2;
+  position: relative;
+  background: #18181b;
+  border-radius: 10px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+#camera-feed {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  transform: scaleX(-1); /* espelha */
+  border-bottom: 2px solid #9146ff;
+}
+
+#start-button {
+  margin: 15px;
+  background-color: #9146ff;
+  border: none;
+  color: white;
+  font-weight: 600;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.2s;
+  font-family: "Elms Sans", sans-serif;
+}
+#start-button:hover {
+  background-color: #772ce8;
+}
+
+/* ===== Chat ===== */
+.chat-section {
+  flex: 1;
+  background-color: #18181b;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid #2f2f35;
+  width: 3500px;
+}
+
+.chat-header {
+  background-color: #1f1f23;
+  padding: 10px;
+  font-weight: 600;
+  border-bottom: 1px solid #2f2f35;
+  color: #bf94ff;
+}
+
+#mensagens {
+  flex: 1;
+  list-style: none;
+  padding: 10px;
+  overflow-y: auto;
+  font-size: 14px;
+  font-family: "Elms Sans", sans-serif;
+}
+
+#mensagens li {
+  margin-bottom: 6px;
+  line-height: 1.4;
+}
+
+/* Nomes coloridos tipo Twitch */
+#mensagens li span.nome {
+  font-weight: 600;
+  color: #bf94ff;
+  margin-right: 5px;
+}
+
+/* ===== Formulário ===== */
+#form-chat {
+  display: flex;
+  padding: 10px;
+  background-color: #1f1f23;
+  border-top: 1px solid #2f2f35;
+  font-family: "Elms Sans", sans-serif;
+}
+
+#form-chat input {
+  background-color: #0e0e10;
+  color: white;
+  border: 1px solid #2f2f35;
+  padding: 8px;
+  border-radius: 5px;
+  font-size: 13px;
+  font-family: "Elms Sans", sans-serif;
+}
+
+#form-chat input#nome {
+  width: 30%;
+  margin-right: 6px;
+}
+
+#form-chat input#mensagem {
+  flex: 1;
+  margin-right: 6px;
+}
+
+#form-chat button {
+  background-color: #9146ff;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s;
+  font-family: "Elms Sans", sans-serif;
+}
+
+#form-chat button:hover {
+  background-color: #772ce8;
+}
+
+.twitch-logo {
+  height: 90px;
+  padding-bottom: 20px;
+}
+  </style>
+
+
+</head>
+<body>
+  <header class="header">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/2/26/Twitch_logo.svg" 
+         alt="Twitch Logo" class="twitch-logo">
+         
+  <div class="stream-container">
+    
+    <!-- Área da câmera -->
+    <div class="camera-section">
+      <video id="camera-feed" autoplay></video>
+      <button id="start-button">🎥 Iniciar Câmera</button>
+    </div>
+
+    <!-- Chat estilo Twitch -->
+    <div class="chat-section">
+      <div class="chat-header">Chat da Live</div>
+      <ul id="mensagens"></ul>
+      <form id="form-chat">
+        <input id="nome" placeholder="User" autocomplete="off" />
+        <input id="mensagem" placeholder="Digite uma mensagem..." autocomplete="off" />
+        <button>Enviar</button>
+      </form>
+    </div>
+
+  </div>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="camera.js"></script>
+  <script src="chat.js"></script>  <!-- Adicionado aqui -->
+</body>
+</html>
+</html>
